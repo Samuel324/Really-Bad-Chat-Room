@@ -7,7 +7,7 @@ if nickname == 'admin':
     password = input("Enter Password for Admin:")
 
     
- #creates a client to connect to the server with, using the imported socked module
+ #creates a client to connect to the server with, using the imported socket module
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #Connect to a host
 client.connect(('192.168.87.22',5555))
