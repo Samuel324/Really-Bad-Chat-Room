@@ -1,16 +1,23 @@
 import socket
 import threading
 
+#checks to see if the username is 'admin' if it is, the client gets admin powers :), if not then they don't :(
 nickname = input("Choose Your Nickname:")
 if nickname == 'admin':
     password = input("Enter Password for Admin:")
 
+    
+ #creates a client to connect to the server with, using the imported socked module
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #Connect to a host
 client.connect(('192.168.87.22',5555))
 
 stop_thread = False
 
+#checks to see if the client is still connected to the server, if it isn't then it is removed from the server
+#also checks to see if the clients wants to be a admin, if it does want to be then they get to put in the password, if it is wrong then no admin privilages.
+#thirdly, checks to see if the username the client inputs is bannned, not useful for banning people as they can reopen and choose a different name, better suited towards
+#the banning of hate speach as a username
 def recieve():
     while True:
         global stop_thread
@@ -33,11 +40,13 @@ def recieve():
                     stop_thread = True
             else:
                 print(message)
+#if the user fails to connect to the server it displays this message.             
         except:
             print('Error Occured while Connecting')
             client.close()
             break
-        
+
+#how the client is able to send information (messages) to the server, along with to other users who are also connected to the server.
 def write():
     while True:
         if stop_thread:
