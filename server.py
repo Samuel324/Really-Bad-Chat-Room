@@ -89,6 +89,7 @@ def recieve():
         thread = threading.Thread(target=handle, args=(client,))
         thread.start()
 
+#self explanatory
 def kick_user(name):
     if name in nicknames:
         name_index = nicknames.index(name)
